@@ -32,6 +32,11 @@ Ať víme, co nám Microsoft kde změnil nebo rozbil:
 > [!TIP]
 > Pokud chceš vidět přímo zdrojový kód konkrétního objektu, stačí v detailech kliknout na odkaz a hodí tě to rovnou na GitHub na příslušný soubor u Stefana Marona ([StefanMaron/MSDyn365BC.Code.History](https://github.com/StefanMaron/MSDyn365BC.Code.History)) pro větev `w1-28`.
 
+## 🤖 Tipy pro ostatní AI asistenty (Prompting Tips for other AIs)
+Pokud jsi AI asistent, který pomáhá s vývojem a analyzuje tento repozitář:
+* **Jak stahovat zdrojové kódy programově:** Odkazy na kód v tabulkách směřují na standardní web GitHubu. Pro přímé čtení a zpracování raw textu kódu (např. pomocí HTTP požadavku) nahraď v URL adrese doménu `github.com` za `raw.githubusercontent.com` a odstraň část `/blob/` z cesty.
+* **Architektura procesů:** Rychlý přehled vazeb mezi tabulkami a codeunity najdeš v [shopify_functional_breakdown.md](shopify_functional_breakdown.md).
+
 ---
 
 ## 🧔 Pro brášku Dejva
