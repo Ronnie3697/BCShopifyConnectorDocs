@@ -16,6 +16,12 @@ Zdroje jsou načteny z oficiální historie kódu Business Central na GitHubu:
 | **Reporty (Reports)** | Spouštěče synchronizace a zpracování (exporty/importy zboží, objednávek, zásob atd.). | [Reporty](shopify_reports.md) |
 | **Funkční oblasti** | Popis chování klíčových procesů (zboží/varianty, vynechané záznamy, logování). | [Funkční oblasti a procesy](shopify_functional_breakdown.md) |
 
+## 📜 Historie změn ve verzích (Version Changes)
+| Období / Verze | Popis změn | Odkaz na changelog |
+| :--- | :--- | :--- |
+| **BC 27 ➔ BC 28** | Přechod na novou major verzi (Podpora kolekcí, obrázků variant, přepracované vratky a logování). | [Změny 27 ➔ 28](VersionChanges/Changes27-28.md) |
+| **BC 28.0 ➔ BC 28.1** | Minoritní opravy a vylepšení (Fulfillment Services, opravy dobropisů, logování, dispute a výplaty). | [Změny v rámci BC 28](VersionChanges/Changes28.md) |
+
 ---
 
 ## ⚡ Pokyny pro synchronizaci a aktualizaci
