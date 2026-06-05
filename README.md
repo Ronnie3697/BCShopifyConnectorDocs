@@ -1,6 +1,6 @@
 # 🛒 Shopify Connector pro Dynamics 365 Business Central - Přehled Objektů
 
-Zdar bráškové a parťáci! 🚀 Vítejte v tomhle našem komunitním rozcestníku a dokumentaci k oficiálnímu **Shopify Connectoru** od Microsoftu pro Business Central. 
+Zdar bráškové, ségry a parťáci! 🚀 Vítejte v tomhle našem komunitním rozcestníku a dokumentaci k oficiálnímu **Shopify Connectoru** od Microsoftu pro Business Central. 
 
 Na nic si tu nehrajeme, kód máme stažený z GitHubu a přehledně rozškatulkovaný, ať se v tom dá rychle vyznat a nemusíte prohledávat celou databázi!
 
