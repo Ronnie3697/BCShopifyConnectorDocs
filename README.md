@@ -6,7 +6,8 @@ Na nic si tu nehrajeme, kód máme stažený z GitHubu a přehledně rozškatulk
 
 Zdroje jsou načteny z:
 - **Verze/Branch:** `w1-28` (Business Central verze 28)
-- **Celkový počet AL objektů:** 633
+- **Aktuální minor verze:** `28.4` (build 28.4.53241.0, synchronizováno 2026-08-18)
+- **Celkový počet AL objektů:** 639 (včetně enumů, interfaců a permission setů)
 
 ---
 
@@ -27,7 +28,7 @@ Ať víme, co nám Microsoft kde změnil nebo rozbil:
 | Období / Verze | Popis změn | Odkaz na changelog |
 | :--- | :--- | :--- |
 | **BC 27 ➔ BC 28** | Přechod na novou major verzi (Podpora kolekcí, obrázků variant, nové vratky a logování). | [Změny 27 ➔ 28](VersionChanges/Changes27-28.md) |
-| **BC 28.0 ➔ BC 28.1** | Minoritní opravy a vylepšení (Fulfillment Services, opravy dobropisů, dispute a výplaty). | [Změny v rámci BC 28](VersionChanges/Changes28.md) |
+| **BC 28.0 ➔ BC 28.4** | Minoritní updaty: 28.1 (Fulfillment Services, dobropisy, disputy), 28.2 (oprava compareAtPrice v bulk operacích), 28.3 (B2B pro všechny plány — nové pole Advanced Shopify Plan), 28.4 (pending refund transakce, mapování měn). | [Změny v rámci BC 28](VersionChanges/Changes28.md) |
 
 > [!TIP]
 > Pokud chceš vidět přímo zdrojový kód konkrétního objektu, stačí v detailech kliknout na odkaz a hodí tě to rovnou na GitHub na příslušný soubor u Stefana Marona ([StefanMaron/MSDyn365BC.Code.History](https://github.com/StefanMaron/MSDyn365BC.Code.History)) pro větev `w1-28`.
@@ -41,6 +42,8 @@ Pokud jsi AI asistent, který pomáhá s vývojem a analyzuje tento repozitář:
 
 ## 🧔 Pro brášku Dejva
 Čau Dejve! Tady jsou tvoje speciální instrukce a věci ohledně aktualizací, které spolu provádíme:
-* **Jak se starám o data:** Kdykoliv se mě zeptáš na Shopify Connector, nejprve zkontroluji repozitář přes sparse-checkout u tebe v počítači a stáhnu případné aktualizace z větve `w1-28` (`git pull`).
-* **Automatické generování:** Pokud se stáhnou změny, automaticky spustím náš lokální skript [parse_al.py](scratch/parse_al.py) a přegeneruji tyto markdown soubory, abys měl vždy čerstvá data přímo na svém OneDrivu.
-* **Přechod na novou major verzi (např. w1-29):** Můžeš mě požádat o přepnutí na novou větev spuštěním skriptu [update_docs.py](scratch/update_docs.py) s přepínačem `--check-latest` nebo `--branch w1-29`.
+* **Jak se starám o data:** Kdykoliv se mě zeptáš na Shopify Connector, nejprve zkontroluji sparse-checkout (`%LOCALAPPDATA%\BCShopifyConnectorDocs\msdyn`, vytvoří se sám — schválně mimo OneDrive) a stáhnu případné aktualizace z větve `w1-28` (`git pull`).
+* **Automatické generování:** Celý update obstará skript [update_docs.py](scratch/update_docs.py) — stáhne novinky a přes [parse_al.py](scratch/parse_al.py) přegeneruje markdown soubory, abys měl vždy čerstvá data přímo na svém OneDrivu. Spuštění: `python scratch/update_docs.py`.
+* **Přechod na novou major verzi (např. w1-29):** Můžeš mě požádat o přepnutí na novou větev spuštěním [update_docs.py](scratch/update_docs.py) s přepínačem `--check-latest` (zjistí nejnovější w1-* větev) nebo rovnou `--branch w1-29`.
+* **Changelogy minor verzí:** Po každém updatu doplň [VersionChanges/Changes28.md](VersionChanges/Changes28.md) — diffy mezi verzemi vypíše `update_docs.py` na konci běhu.
+* **⚠️ Windows pozor:** checkout potřebuje `git config core.longpaths true` (dlouhé cesty ve složce `Order Return Refund Processing` se jinak tiše nevytvoří a v dokumentaci pak chybí ~20 objektů) — skript to nastavuje automaticky.
