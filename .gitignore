@@ -1,0 +1,3 @@
+# Lokální sparse-checkout zdrojáků (vytváří scratch/update_docs.py)
+scratch/.checkout/
+__pycache__/
