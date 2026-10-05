@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 """Generátor dokumentace Shopify Connectoru pro Business Central.
 
-Projde AL zdrojáky ve sparse-checkoutu repa StefanMaron/MSDyn365BC.Code.History
-(složka `Shopify/app/Shopify Connector/src`) a vygeneruje markdown soubory
+Projde AL zdrojáky ve sparse-checkoutu repa microsoft/BCApps
+(složka `src/Apps/W1/Shopify/App/src`) a vygeneruje markdown soubory
 shopify_tables.md, shopify_pages.md, shopify_codeunits.md a shopify_reports.md.
 
 Sloupec "Popis / Summary" je konkatenace všech XML doc `<summary>` bloků
 v souboru (whitespace sbalený, spojeno mezerou); bez doc komentářů je "-".
 
 Použití:
-    python parse_al.py --src <cesta ke checkoutu> --out <cesta k docs repu> [--branch w1-28]
+    python parse_al.py --src <cesta ke checkoutu> --out <cesta k docs repu> [--branch releases/28.5]
 """
 import argparse
 import re
@@ -27,8 +27,8 @@ OBJ_RE = re.compile(
 )
 SUMMARY_RE = re.compile(r'<summary>(.*?)</summary>', re.DOTALL)
 
-GITHUB_BASE = 'https://github.com/StefanMaron/MSDyn365BC.Code.History/blob'
-APP_SRC = Path('Shopify') / 'app' / 'Shopify Connector' / 'src'
+GITHUB_BASE = 'https://github.com/microsoft/BCApps/blob'
+APP_SRC = Path('src/Apps/W1/Shopify/App/src')
 
 
 def parse_al_file(path: Path):
@@ -116,9 +116,9 @@ def write_md(path: Path, title: str, sections) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--src', required=True, help='Root sparse-checkoutu (obsahuje složku Shopify/)')
+    parser.add_argument('--src', required=True, help='Root sparse-checkoutu microsoft/BCApps')
     parser.add_argument('--out', required=True, help='Root docs repa (kam zapsat shopify_*.md)')
-    parser.add_argument('--branch', default='w1-28', help='Větev pro GitHub odkazy (default w1-28)')
+    parser.add_argument('--branch', default='releases/28.5', help='Větev pro GitHub odkazy (default releases/28.5)')
     args = parser.parse_args()
 
     src_root = Path(args.src)

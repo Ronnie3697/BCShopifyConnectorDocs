@@ -1,6 +1,6 @@
 # Shopify Connector - Změny v rámci verze BC 28 (Changes 28 - Minor Updates)
 
-Tento dokument detailně popisuje změny a minoritní aktualizace v **Shopify Connectoru** v rámci verze **Business Central 28** (postupné přechody **28.0 ➔ 28.1 ➔ 28.2 ➔ 28.3 ➔ 28.4**).
+Tento dokument detailně popisuje změny a minoritní aktualizace v **Shopify Connectoru** v rámci verze **Business Central 28** (postupné přechody **28.0 ➔ 28.1 ➔ 28.2 ➔ 28.3 ➔ 28.4 ➔ 28.5**).
 
 ---
 
@@ -114,4 +114,50 @@ Tento dokument detailně popisuje změny a minoritní aktualizace v **Shopify Co
 * Codeunit `Shpfy Update Price Source` (ID 30272) změněn z `Access = Internal` na **`Access = Public`** — subscribery pro výpočet cen dle Shopify zákazníka jde nově využít i z vlastních rozšíření.
 
 ---
-*Dokument je generován lokálně z diffů větve `w1-28` (StefanMaron/MSDyn365BC.Code.History) mezi commity jednotlivých minor verzí.*
+## BC 28.4 → BC 28.5
+
+Ověřeno 2026-09-07 proti oficiálním zdrojům [microsoft/BCApps, releases/28.5](https://github.com/microsoft/BCApps/tree/releases/28.5/src/Apps/W1/Shopify). Verze v `App/app.json` je **28.5.0.0**; není to číslo konkrétního distribuovaného buildu ani potvrzení dostupnosti aktualizace v tenantech.
+
+### Rozsah porovnání
+
+- Oficiální snapshot 28.4: `d3f232623dfc4ff577f26222a9eb7fd261df25cf`.
+- Oficiální snapshot 28.5: `278c96d3a8d4d691137f14febae59816a8bf616f`.
+- [Diff těchto snapshotů](https://github.com/microsoft/BCApps/compare/d3f232623dfc4ff577f26222a9eb7fd261df25cf...278c96d3a8d4d691137f14febae59816a8bf616f): pro statistiku zde je použit přímý `git diff <28.4-sha> <28.5-sha> -- src/Apps/W1/Shopify` (webový compare může zobrazovat rozdíl od společného předka).
+- V celé složce Shopify **12 změněných souborů, +399 / −51 řádků**, včetně manifestů, testů a jejich JSON odpovědí.
+- V produkčním `App/src` **6 změněných AL souborů, +74 / −41 řádků**. Počet objektů zůstává **639**, žádný AL objekt nepřibyl ani nezmizel.
+
+### 1. Přesnější párování zákazníků podle e-mailu a telefonu
+
+`Shpfy Customer API` (codeunit 30114) nyní kontroluje i hodnotu vrácenou vyhledáváním Shopify. Samotný první výsledek už nestačí: e-mail musí přesně odpovídat po převodu na malá písmena, telefon po odstranění znaků kromě číslic a `+`. Telefon obsahující mezery, závorky či pomlčky se tak porovnává bez těchto oddělovačů. Nesouhlasící výsledek vrací ID `0`; nehrozí přijetí pouze částečné shody z tokenizovaného vyhledávání.
+
+GraphQL codeunity `Shpfy GQL FindCustByEMail` (30129) a `Shpfy GQL FindCustByPhone` (30130) proto nově žádají také `defaultEmailAddress.emailAddress` a `defaultPhoneNumber.phoneNumber`; očekávaná cena dotazu stoupla z 3 na 4. Vyhledávání stále používá `customers(first: 1)`, takže změna nepřidává procházení dalších výsledků. Normalizace telefonu nedoplňuje předvolbu země.
+
+Zdroj: [oprava párování zákazníků (#10621)](https://github.com/microsoft/BCApps/commit/bc180c9d).
+
+### 2. Filtrování katalogů při synchronizaci cen
+
+Report `Shpfy Sync Catalog Prices` (30116) má pod obchodem nový dataitem katalogu s filtry **Id** a **Name**. Lze tak omezit synchronizaci na vybrané katalogy a rozdělit rozsáhlé B2B zpracování. Nadále se zpracovávají pouze katalogy s povoleným `Sync Prices` a uplatňují se nastavené filtry firmy a typu katalogu.
+
+Codeunit stejného názvu (30295) už nemá `TableNo` ani zpracování v `OnRun`; report nastavuje obchod přes `SetShop` a předává jednotlivé katalogy do nové interní procedury `SyncCatalog`. Codeunit si pamatuje zpracovaná ID katalogů a při nastavení obchodu seznam vymaže. Původní interní `SetCompanyId` zmizelo, filtr je v reportu. Při údržbě vlastního forku je tedy potřeba prověřit případná přímá volání této codeunity.
+
+Změna reaguje na překročení dvanáctihodinového limitu rozsáhlé synchronizace; sama nezaručuje dokončení libovolně velké dávky. Zdroj: [filtry synchronizace cen katalogů (#10296)](https://github.com/microsoft/BCApps/commit/806d2999).
+
+### 3. Export variant po „Add Item as Shopify Variant“
+
+`Shpfy Product Export` (codeunit 30178) před hledáním chybějících variant znovu načte hlavní zboží podle `Shpfy Product."Item SystemId"`. Smyčka aktualizující existující Shopify varianty totiž mohla ponechat v proměnné `Item` jiné zboží, přidané jako varianta produktu. Export potom nesprávně vytvářel i jeho další, nenamapované varianty.
+
+V 28.5 se chybějící varianty a měrné jednotky hledají opět vůči hlavnímu zboží produktu. Pokud hlavní zboží neexistuje, tato část exportu skončí. Zdroj: [oprava exportu variant (#8615)](https://github.com/microsoft/BCApps/commit/06255643).
+
+### Testy v upstreamu
+
+Microsoft přidal šest regresních testů: pět pro normalizaci telefonu, odmítnutí částečné shody a přijetí přesné shody telefonu/e-mailu; jeden pro export produktu s jiným zbožím namapovaným jako varianta. Test exportu ověřuje, že se nepřidá jeho další nenamapovaná varianta. Při této aktualizaci dokumentace byly testy přečteny, nebyly spouštěny v BC.
+
+### Rozdíl proti předchozí dokumentaci 28.4
+
+Dosavadní dokumentace vycházela z buildu **28.4.53241.0** v repozitáři StefanMaron/MSDyn365BC.Code.History (`271a0b6020d22eda93437f10723cee5c8cb064ba`). Proti tomuto staršímu snapshotu se v nynějším `App/src` změnilo **7 AL souborů**, nikoli jen šest z přímého porovnání oficiálních větví výše.
+
+Dodatečná změna je v `Shpfy Authentication Mgt.` (codeunit 30199): odpověď OAuth obsahující přístupový token se již nepředává do laditelné procedury `JsonHelper`. Token a scope se čtou přímo uvnitř procedury `GetToken` označené `[NonDebuggable]`, token se ukládá do `SecretText`. Tato úprava je **už v pozdějším oficiálním zdroji 28.4**, takže ji neoznačujeme za novinku dostupnou výhradně od 28.5. Zdroj: [28.4 maintenance update z 2026-08-28 (#10688)](https://github.com/microsoft/BCApps/commit/8228410a).
+
+---
+
+*Části do 28.4 vycházejí z diffů větve `w1-28` (StefanMaron/MSDyn365BC.Code.History). Část 28.4 → 28.5 vychází z přímého diffu výše uvedených snapshotů microsoft/BCApps; rozdíl proti původnímu dokumentovanému buildu je popsán samostatně.*
