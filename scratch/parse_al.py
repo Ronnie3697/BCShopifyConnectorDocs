@@ -10,7 +10,7 @@ Sloupec "Popis / Summary" je konkatenace všech XML doc `<summary>` bloků
 v souboru (whitespace sbalený, spojeno mezerou); bez doc komentářů je "-".
 
 Použití:
-    python parse_al.py --src <cesta ke checkoutu> --out <cesta k docs repu> [--branch releases/28.5]
+    python parse_al.py --src <cesta ke checkoutu> --out <cesta k docs repu> [--branch releases/29.0]
 """
 import argparse
 import re
@@ -118,7 +118,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--src', required=True, help='Root sparse-checkoutu microsoft/BCApps')
     parser.add_argument('--out', required=True, help='Root docs repa (kam zapsat shopify_*.md)')
-    parser.add_argument('--branch', default='releases/28.5', help='Větev pro GitHub odkazy (default releases/28.5)')
+    parser.add_argument('--branch', default='releases/29.0', help='Větev pro GitHub odkazy (default releases/29.0)')
     args = parser.parse_args()
 
     src_root = Path(args.src)

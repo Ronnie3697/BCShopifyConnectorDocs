@@ -122,6 +122,7 @@ Ověřeno 2026-09-07 proti oficiálním zdrojům [microsoft/BCApps, releases/28.
 
 - Oficiální snapshot 28.4: `d3f232623dfc4ff577f26222a9eb7fd261df25cf`.
 - Oficiální snapshot 28.5: `278c96d3a8d4d691137f14febae59816a8bf616f`.
+- Pozdější snapshot 28.5 `45d68f32077c89de4b422a8c05cc8f88959bba18` (2026-10-05) má ve složce Shopify shodný obsah; z něj vychází porovnání v [Changes28-29.md](Changes28-29.md).
 - [Diff těchto snapshotů](https://github.com/microsoft/BCApps/compare/d3f232623dfc4ff577f26222a9eb7fd261df25cf...278c96d3a8d4d691137f14febae59816a8bf616f): pro statistiku zde je použit přímý `git diff <28.4-sha> <28.5-sha> -- src/Apps/W1/Shopify` (webový compare může zobrazovat rozdíl od společného předka).
 - V celé složce Shopify **12 změněných souborů, +399 / −51 řádků**, včetně manifestů, testů a jejich JSON odpovědí.
 - V produkčním `App/src` **6 změněných AL souborů, +74 / −41 řádků**. Počet objektů zůstává **639**, žádný AL objekt nepřibyl ani nezmizel.

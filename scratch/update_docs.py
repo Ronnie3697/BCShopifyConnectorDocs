@@ -8,9 +8,9 @@ dokumentaci přes parse_al.py. Na konci vypíše přehled commitů (minor verzí
 od posledního běhu — podklad pro ruční doplnění VersionChanges/*.md.
 
 Použití:
-    python update_docs.py                  # update releases/28.5
+    python update_docs.py                  # update releases/29.0
     python update_docs.py --check-latest   # zjistí nejnovější číselnou release větev
-    python update_docs.py --branch releases/28.6  # přepne na jinou větev
+    python update_docs.py --branch releases/29.1  # přepne na jinou větev
 """
 import argparse
 import os
@@ -25,7 +25,7 @@ DOCS_ROOT = SCRIPT_DIR.parent
 # Checkout záměrně MIMO OneDrive (žádný sync tisíců souborů) a s krátkou cestou
 # (Windows MAX_PATH) — viz ⚠️ v README.
 CHECKOUT = Path(os.environ.get('LOCALAPPDATA', SCRIPT_DIR)) / 'BCShopifyConnectorDocs' / 'bcapps'
-DEFAULT_BRANCH = 'releases/28.5'
+DEFAULT_BRANCH = 'releases/29.0'
 SHOPIFY_ROOT = 'src/Apps/W1/Shopify'
 
 
