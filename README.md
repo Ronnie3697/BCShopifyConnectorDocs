@@ -7,8 +7,8 @@ Na nic si tu nehrajeme, kód máme stažený z GitHubu a přehledně rozškatulk
 Zdroje jsou načteny z:
 
 - **Zdroj/Branch:** [microsoft/BCApps](https://github.com/microsoft/BCApps/tree/releases/29.0/src/Apps/W1/Shopify), `releases/29.0`
-- **Aktuální verze:** `29.0` (verze v `App/app.json`: `29.0.0.0`, synchronizováno 2026-10-05)
-- **Snapshot zdrojů:** [`84f94fce`](https://github.com/microsoft/BCApps/commit/84f94fce9754c8d1c9440dc62885ff33788778ae). Jde o release zdrojový kód; číslo konkrétního distribuovaného buildu ani dostupnost aktualizace v tenantech z něj neurčujeme.
+- **Aktuální verze:** `29.0` (verze v `App/app.json`: `29.0.0.0`, synchronizováno 2026-10-19)
+- **Snapshot zdrojů:** [`28896630`](https://github.com/microsoft/BCApps/commit/288966302f7be8f3fe08f02cde0059a4c4a7f4a7) (výchozí bod 29.0 byl [`84f94fce`](https://github.com/microsoft/BCApps/commit/84f94fce9754c8d1c9440dc62885ff33788778ae)). Jde o release zdrojový kód; číslo konkrétního distribuovaného buildu ani dostupnost aktualizace v tenantech z něj neurčujeme.
 - **Celkový počet AL objektů:** 509 (včetně enumů, interfaců a permission setů; v 28.5 jich bylo 639 — 129 GQL codeunitů nahradily `.graphql` resource soubory)
 - **Dokumentace BC 28:** poslední stav 28.5 je v historii repa ([commit `b0db0b2`](https://github.com/Ronnie3697/BCShopifyConnectorDocs/tree/b0db0b2)), změny popisuje [Changes28.md](VersionChanges/Changes28.md).
 
@@ -33,7 +33,7 @@ Ať víme, co nám Microsoft kde změnil nebo rozbil:
 | **BC 27 ➔ BC 28** | Přechod na novou major verzi (Podpora kolekcí, obrázků variant, nové vratky a logování). | [Změny 27 ➔ 28](VersionChanges/Changes27-28.md) |
 | **BC 28.0 ➔ BC 28.5** | Minoritní updaty: 28.1 (Fulfillment Services, dobropisy, disputy), 28.2 (compareAtPrice), 28.3 (B2B pro všechny plány), 28.4 (pending refund transakce, měny), 28.5 (přesné párování zákazníků, filtry katalogů, export variant). | [Změny v rámci BC 28](VersionChanges/Changes28.md) |
 | **BC 28 ➔ BC 29** | Přechod na novou major verzi (expirující tokeny, GraphQL dotazy v resource souborech, API 2026-07, číslo Shopify objednávky jako číslo dokladu, vratkové objednávky, HS kódy, stav Unlisted, daňové údaje objednávek). | [Změny 28 ➔ 29](VersionChanges/Changes28-29.md) |
-| **BC 29.0 ➔ …** | Minoritní updaty BC 29 (zatím jen výchozí bod 29.0). | [Změny v rámci BC 29](VersionChanges/Changes29.md) |
+| **BC 29.0 ➔ …** | Minoritní updaty BC 29: servisní oprava 29.0 (párování daní jen pro US/CA, `Shpfy Order Tax Line.Title` na Code[100]). | [Změny v rámci BC 29](VersionChanges/Changes29.md) |
 
 **Nově v 29.0:** [Změny 28 ➔ 29, sekce „Co musí řešit vývojáři rozšíření a provoz"](VersionChanges/Changes28-29.md) — hlavně **expirující tokeny**: Shopify od 2027-01-01 odmítne neexpirující tokeny a migraci má zatím jen BC 29 (v `releases/28.x` k 2026-10-02 není).
 

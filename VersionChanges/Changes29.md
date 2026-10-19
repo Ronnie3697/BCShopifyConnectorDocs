@@ -13,4 +13,16 @@ Tento dokument bude popisovat minoritní aktualizace **Shopify Connectoru** v r�
 
 ---
 
-*Zatím bez minoritních změn. Průběžná větev `releases/29.x` není číselná release větev a `update_docs.py --check-latest` ji ignoruje.*
+## Servisní opravy v `releases/29.0` (bez změny verze 29.0.0.0)
+
+Snapshot ke 2026-10-19: [`28896630`](https://github.com/microsoft/BCApps/commit/288966302f7be8f3fe08f02cde0059a4c4a7f4a7). Počet objektů beze změny (509).
+
+### Daně objednávek mimo US/CA ([#12436](https://github.com/microsoft/BCApps/commit/201336cdb45b2dadef363402020f13c1dd096878), 2026-10-08)
+
+* Backport #11722 a #11899: párování daní Shopify objednávek (Shopify Tax Matching) se **nespouští pro objednávky mimo USA a Kanadu**.
+* Jediná změna v App proti snapshotu 29.0: `Shpfy Order Tax Line` (30122), pole `Title` prodlouženo z `Code[20]` na **`Code[100]`** (s `#pragma warning disable AS0086`, tabulka je internal). Delší názvy daní ze Shopify už nepadají na délce pole.
+* Zbytek commitu jsou testy (`ShpfyShippingChargesTest`).
+
+---
+
+*Průběžná větev `releases/29.x` není číselná release větev a `update_docs.py --check-latest` ji ignoruje.*
